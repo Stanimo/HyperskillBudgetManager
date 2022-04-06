@@ -1,5 +1,8 @@
 package budget;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 import static budget.InputHandler.scanner;
@@ -48,7 +51,7 @@ public class UserService {
     }
 
     public static void showPurchases(String type) {
-        System.out.println("");
+        //System.out.println("");
 
         if ("Food".equals(type)) {
             for (Map.Entry<String, Double> entry : foodList.entrySet()) {
@@ -110,4 +113,36 @@ public class UserService {
         }
     }
 
+    public static void save() {
+        //TODO finish save option in UserService
+        File saveFile = new File("./budget_save.txt");
+        try {
+            boolean createdNewFile = saveFile.createNewFile();
+            if (createdNewFile) {
+                //TODO add the internals of saving the maps to a text file
+                try (PrintWriter printWriter = new PrintWriter(saveFile)) {
+                    printWriter.println("This is a test print");
+                    printWriter.println("Food:");
+                    for (Map.Entry<String, Double> entry : foodList.entrySet()) {
+                        printWriter.println(entry.getKey() + " $" + entry.getValue());
+                    }
+                } catch (IOException e) {
+                    System.out.printf("Writing exception %s", e.getMessage());
+                }
+                System.out.println("Purchases were saved!");
+            } else {
+                //TODO overwrite the file if it already exists and comment out the notification (leave it for future)
+                System.out.println("The file already exists");
+            }
+        } catch (IOException e) {
+            System.out.println("Cannot create the file " + saveFile.getPath());
+        }
+        System.out.println("Purchases were saved!");
+    }
+
+    public static void load() {
+        //TODO finish load option in UserService
+        File loadFile = new File("./budget_save.txt");
+
+    }
 }

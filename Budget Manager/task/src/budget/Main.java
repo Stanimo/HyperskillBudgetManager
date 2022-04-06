@@ -11,6 +11,8 @@ public class Main {
                 "2) Add purchase\n" +
                 "3) Show list of purchases\n" +
                 "4) Balance\n" +
+                "5) Save\n" +
+                "6) Load" +
                 "0) Exit");
         switch(InputHandler.inputMenuNo()) {
             case 1: {
@@ -118,6 +120,16 @@ public class Main {
             case 4: {
                 UserService.currentBalance();
                 menu00();
+                break;
+            }
+            case 5: {
+                UserService.save();
+                //TODO finish save option
+                break;
+            }
+            case 6: {
+                UserService.load();
+                //TODO finish load option
                 break;
             }
             case 0: {
